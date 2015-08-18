@@ -12,7 +12,7 @@ $(function(){
         $('.video-list ul').html('');
         $.each(fileList,function(index,val){
             $('.video-list ul').append(
-                '<li class="list-group-item" data-id="'+ index +'">' + val +'</li>'
+                '<li class="list-group-item" data-id="'+ index +'">' + val +'<a href="#"><i class="glyphicon glyphicon-remove pull-right"></i></a></li>'
             );
         });
     });

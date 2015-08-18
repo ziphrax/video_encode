@@ -38,6 +38,7 @@
 }
 .video-list ul.list-group {
     background-color:rgb(43, 48, 59);
+    margin-bottom:5px;
 }
 .list-group-item {
     background-color:rgb(43, 48, 59);
