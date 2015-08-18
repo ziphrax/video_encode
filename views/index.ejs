@@ -5,21 +5,18 @@
     <body>
 
         <div>
-            <strong>Files</strong><br />
-            <pre><%- JSON.stringify(files) %></pre>
-
+            <strong>Upload Status</strong><br />
             <span id="ffmpegStatus"></span>
-
         </div>
 
-        <form method="post" action="video_upload" enctype="multipart/form-data" id="uploadForm">
-            <input type="file" id="video" name="video" />
-            <input type="submit" id="upload" name="upload" value="upload" />
-        </form>
+        <input type="file" id="file" name="file" />
+
 
         <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="jquery.form.min.js"></script>
+        <script src="socket.io-stream.js"></script>
         <script type="text/javascript" src="uploader.js"></script>
+
     </body>
 </html>

@@ -3,10 +3,9 @@ var express = require('express')
     server = require('http').createServer(app);
     ffmpeg = require('fluent-ffmpeg'),
     command = ffmpeg(),
-    multer = require('multer'),
-    upload = multer({ dest: 'tmp/video' }),
-
+    path = require('path'),
     io = require('socket.io').listen(server),
+    ss = require('socket.io-stream'),
     fs = require('fs'),
     server_port = 3000;
 
@@ -22,18 +21,35 @@ io.on('connection',function(socket){
     socket.on('disconnect',function(){
         console.log('socket disconnected');
     });
-});
 
-app.get('/',function(req,res){
-    fs.readdir( __dirname + "/uploads/",function(err,files){
-        if(err){
-            res.render('error',{error: err});
-        } else {
-            res.render('index',{files:files});
-        }
+    ss(socket).on('media upload', function(stream,file) {
+        console.log('New media uploading...');
+        stream.on('end',function(evt){
+            ffmpeg(__dirname+'/tmp/uploads/' + file.name)
+            .output(__dirname+'/tmp/video/sm_'+file.name)
+            .size('320x200')
+            .on('progress', function(progress) {
+                socket.emit('progress','ffmpeg encode: ' + progress.percent + '% done');
+                console.log('ffmpeg ' +  Math.floor(progress.percent) + '% done');
+             })
+             .on('error', function(err, stdout, stderr) {
+                 socket.emit('progress','ffmpeg Cannot process video: ' + err.message);
+                 console.log('Cannot process video: ' + err.message);
+             })
+             .on('end',function(){
+                 socket.emit('progress','ffmpeg encode finished!');
+                 console.log('ffmpeg done!');
+             })
+            .run();
+        }).pipe(fs.createWriteStream(__dirname+'/tmp/uploads/' + file.name));
     });
 });
 
+app.get('/',function(req,res){
+    res.render('index');
+});
+
+/*
 app.post('/video_upload', upload.single('video'), function (req, res, next) {
     fs.readFile(req.file.path,function(err,data){
         var newPath = __dirname + "/tmp/uploads/" + req.file.originalname;
@@ -63,6 +79,7 @@ app.post('/video_upload', upload.single('video'), function (req, res, next) {
         });
     });
 });
+*/
 
 server.listen(server_port,function(){
     console.log('video_enc app listening...');
