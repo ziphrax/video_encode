@@ -1,14 +1,15 @@
 $(function(){
     var socket = io();
+    var strIcon = '<i class="glyphicon glyphicon-file"></i>&nbsp;';
 
     $ffmpegStatus = $('#ffmpegStatus');
 
     socket.on('disconnect',function(thisSocket){
-        $ffmpegStatus.text('Socket Disconnected');
+        $ffmpegStatus.html('Socket Disconnected');
     });
 
     socket.on('progress',function(message){
-        $ffmpegStatus.text(message);
+        $ffmpegStatus.html(strIcon + message);
     });
 
     $('#file').change(function(e) {
@@ -24,11 +25,11 @@ $(function(){
         var size = 0;
         blobStream.on('data', function(chunk) {
             size += chunk.length;
-            $ffmpegStatus.text('Uploading: ' + Math.floor(size / file.size * 100) + '%');
+            $ffmpegStatus.html(strIcon + 'Uploading: ' + Math.floor(size / file.size * 100) + '%');
         });
 
         blobStream.on('end', function(chunk) {
-            $ffmpegStatus.text('Upload Complete, Starting Encode...');
+            $ffmpegStatus.html(strIcon + 'Encoding...');
         });
 
         blobStream.pipe(stream);

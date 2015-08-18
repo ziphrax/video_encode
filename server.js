@@ -16,7 +16,6 @@ app.use(express.static('public'));
 
 io.on('connection',function(socket){
     console.log('socket connected');
-    socket.emit('progress', 'Connected');
 
     socket.on('disconnect',function(){
         console.log('socket disconnected');
@@ -30,7 +29,7 @@ io.on('connection',function(socket){
             .output(__dirname+'/tmp/video/sm_'+file.name)
             .size('320x200')
             .on('progress', function(progress) {
-                socket.emit('progress','ffmpeg encode: ' +  Math.floor(progress.percent) + '% done');
+                socket.emit('progress','Progress: ' +  Math.floor(progress.percent) + '%');
                 console.log('ffmpeg ' +  Math.floor(progress.percent) + '% done');
              })
              .on('error', function(err, stdout, stderr) {
@@ -38,7 +37,7 @@ io.on('connection',function(socket){
                  console.log('Cannot process video: ' + err.message);
              })
              .on('end',function(){
-                 socket.emit('progress','ffmpeg encode finished!');
+                 socket.emit('progress','Finished!');
                  console.log('ffmpeg done!');
              })
             .run();

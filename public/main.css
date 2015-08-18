@@ -1,0 +1,38 @@
+.upload-control {
+    font-family: arial;
+    width:300px;
+    background-color:rgb(43, 48, 59);
+    color: rgb(241, 248, 250);
+    border: 1px solid rgb(212, 237, 255);
+    border-radius: 5px;
+    padding:10px;
+    margin:10px;
+    box-shadow: 0px 0px 1px 1px rgb(204, 204, 204);
+}
+.status-title {
+    line-height:34px;
+    font-size: 1.3em;
+    color: rgb(89, 215, 232);
+}
+#ffmpegStatus {
+    line-height:30px;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}

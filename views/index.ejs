@@ -1,20 +1,24 @@
 <html>
     <head>
         <title>Video Enc</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="main.css">
     </head>
     <body>
 
-        <div>
-            <strong>Upload Status</strong><br />
-            <span id="ffmpegStatus"></span>
+        <div class="upload-control">
+            <div class="status-title">Shrink Video</div>
+            <span id="ffmpegStatus">Please pick a file to upload...</span>
+            <div class="btn btn-default btn-file pull-right">
+                <i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;Browse
+                <input type="file" id="file" name="file" />
+            </div>
         </div>
-
-        <input type="file" id="file" name="file" />
-
 
         <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="jquery.form.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
         <script src="socket.io-stream.js"></script>
         <script type="text/javascript" src="uploader.js"></script>
 
