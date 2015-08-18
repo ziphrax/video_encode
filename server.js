@@ -16,6 +16,7 @@ app.use(express.static('public'));
 
 io.on('connection',function(socket){
     console.log('socket connected');
+    socket.emit('update file list',getFiles(__dirname+'/tmp/video/'));
 
     socket.on('disconnect',function(){
         console.log('socket disconnected');
@@ -38,6 +39,7 @@ io.on('connection',function(socket){
              })
              .on('end',function(){
                  socket.emit('progress','Finished!');
+                 socket.emit('update file list',getFiles(__dirname+'/tmp/video/'));
                  console.log('ffmpeg done!');
              })
             .run();
@@ -53,3 +55,7 @@ app.get('/',function(req,res){
 server.listen(server_port,function(){
     console.log('video_enc app listening...');
 });
+
+function getFiles(path){
+    return fs.readdirSync(path);
+}

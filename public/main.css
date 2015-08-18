@@ -1,4 +1,4 @@
-.upload-control {
+.video-list, .upload-control {
     font-family: arial;
     width:300px;
     background-color:rgb(43, 48, 59);
@@ -35,4 +35,11 @@
     background: white;
     cursor: inherit;
     display: block;
+}
+.video-list ul.list-group {
+    background-color:rgb(43, 48, 59);
+}
+.list-group-item {
+    background-color:rgb(43, 48, 59);
+    color: rgb(241, 248, 250);
 }

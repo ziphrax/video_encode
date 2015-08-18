@@ -8,6 +8,15 @@ $(function(){
         $ffmpegStatus.html('Socket Disconnected');
     });
 
+    socket.on('update file list',function(fileList){
+        $('.video-list ul').html('');
+        $.each(fileList,function(index,val){
+            $('.video-list ul').append(
+                '<li class="list-group-item" data-id="'+ index +'">' + val +'</li>'
+            );
+        });
+    });
+
     socket.on('progress',function(message){
         $ffmpegStatus.html(strIcon + message);
     });
