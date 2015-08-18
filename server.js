@@ -29,12 +29,11 @@ io.on('connection',function(socket){
 
     ss(socket).on('media upload', function(stream,file) {
         console.log('New media uploading...');
-        console.log('File Preset:' + file.preset);
 
         stream.on('end',function(evt){
             ffmpeg(__dirname+'/tmp/uploads/' + file.name)
-            .output(__dirname+'/tmp/video/sm_'+file.name)
-            .size('320x200')
+            .output(__dirname+'/tmp/video/' + file.preset + '_' + file.name )
+            .preset(file.preset)
             .on('progress', function(progress) {
                 socket.emit('progress','Progress: ' +  Math.floor(progress.percent) + '%');
                 console.log('ffmpeg ' +  Math.floor(progress.percent) + '% done');
