@@ -34,7 +34,11 @@ $(function(){
         var stream = ss.createStream();
 
         // upload a file to the server.
-        ss(socket).emit('media upload', stream, {size: file.size, name: file.name});
+        ss(socket).emit('media upload', stream, {
+            size: file.size,
+            name: file.name,
+             preset: $('select[name="preset"]').val()
+         });
 
         var blobStream = ss.createBlobReadStream(file);
 
