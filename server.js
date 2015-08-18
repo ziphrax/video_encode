@@ -24,6 +24,7 @@ io.on('connection',function(socket){
 
     ss(socket).on('media upload', function(stream,file) {
         console.log('New media uploading...');
+
         stream.on('end',function(evt){
             ffmpeg(__dirname+'/tmp/uploads/' + file.name)
             .output(__dirname+'/tmp/video/sm_'+file.name)
@@ -41,6 +42,7 @@ io.on('connection',function(socket){
                  console.log('ffmpeg done!');
              })
             .run();
+            
         }).pipe(fs.createWriteStream(__dirname+'/tmp/uploads/' + file.name));
     });
 });
