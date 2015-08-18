@@ -17,6 +17,14 @@ $(function(){
         });
     });
 
+    $('.video-list ul').on('click','li',function(e){
+        e.preventDefault();
+
+        socket.emit('remove file',$(this).data('id'));
+
+        return false;
+    });
+
     socket.on('progress',function(message){
         $ffmpegStatus.html(strIcon + message);
     });

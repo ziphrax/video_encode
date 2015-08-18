@@ -22,6 +22,11 @@ io.on('connection',function(socket){
         console.log('socket disconnected');
     });
 
+    socket.on('remove file',function(index){
+        console.log('Remove File('+index+')');
+        socket.emit('update file list',getFiles(__dirname+'/tmp/video/'));
+    });
+
     ss(socket).on('media upload', function(stream,file) {
         console.log('New media uploading...');
 
