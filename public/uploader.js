@@ -1,6 +1,8 @@
 $(function(){
     var socket = io();
 
+    $ffmpegStatus = $('#ffmpegStatus');
+    
     $('#uploadForm').submit(function(e){
         e.preventDefault;
         $(this).ajaxSubmit({
@@ -10,23 +12,22 @@ $(function(){
           },
 
           success: function(response) {
-            $('#ffmpegStatus').text('File Upload: ' + response.status);
+            $ffmpegStatus.text('File Upload: ' + response.status);
           }
       });
-      //Very important line, it disable the page refresh.
       return false;
     });
 
     socket.on('connection',function(thisSocket){
-        $('#ffmpegStatus').text('Socket Connected');
+        $ffmpegStatus.text('Socket Connected');
     });
 
     socket.on('disconnect',function(thisSocket){
-        $('#ffmpegStatus').text('Socket Disconnected');
+        $ffmpegStatus.text('Socket Disconnected');
     });
 
 
     socket.on('progress',function(data){
-        $('#ffmpegStatus').text(data);
+        $ffmpegStatus.text(data);
     });
 });

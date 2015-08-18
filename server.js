@@ -15,7 +15,6 @@ app.set('view engine','ejs');
 
 app.use(express.static('public'));
 
-
 io.on('connection',function(socket){
     console.log('socket connected');
     socket.emit('progress', 'Connected');
@@ -24,7 +23,6 @@ io.on('connection',function(socket){
         console.log('socket disconnected');
     });
 });
-
 
 app.get('/',function(req,res){
     fs.readdir( __dirname + "/uploads/",function(err,files){
