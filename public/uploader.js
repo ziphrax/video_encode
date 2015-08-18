@@ -12,17 +12,15 @@ $(function(){
         $('.video-list ul').html('');
         $.each(fileList,function(index,val){
             $('.video-list ul').append(
-                '<li class="list-group-item" data-id="'+ index +'">' + val +'<a href="#"><i class="glyphicon glyphicon-remove pull-right"></i></a></li>'
+                '<li class="list-group-item" data-id="'+ val +'">' + val +'<a href="#"><i class="glyphicon glyphicon-remove pull-right"></i></a></li>'
             );
         });
     });
 
     $('.video-list ul').on('click','li',function(e){
         e.preventDefault();
-
-        socket.emit('remove file',$(this).data('id'));
-
-        return false;
+        var val = $(this).data('id');
+        socket.emit('remove file',val);
     });
 
     socket.on('progress',function(message){

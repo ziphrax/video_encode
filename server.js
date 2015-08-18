@@ -23,7 +23,8 @@ io.on('connection',function(socket){
     });
 
     socket.on('remove file',function(index){
-        console.log('Remove File('+index+')');
+        console.log('Remove File: '+index);
+        fs.unlinkSync(__dirname+'/tmp/video/' + index);
         socket.emit('update file list',getFiles(__dirname+'/tmp/video/'));
     });
 
