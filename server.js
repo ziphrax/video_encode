@@ -29,7 +29,7 @@ io.on('connection',function(socket){
             .output(__dirname+'/tmp/video/sm_'+file.name)
             .size('320x200')
             .on('progress', function(progress) {
-                socket.emit('progress','ffmpeg encode: ' + progress.percent + '% done');
+                socket.emit('progress','ffmpeg encode: ' +  Math.floor(progress.percent) + '% done');
                 console.log('ffmpeg ' +  Math.floor(progress.percent) + '% done');
              })
              .on('error', function(err, stdout, stderr) {
